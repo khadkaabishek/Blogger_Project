@@ -1,5 +1,5 @@
 const JWT = require("jsonwebtoken");
-const secret = "@bi$hek290";
+const secret = process.env.Secret;
 // const User = require("./../models/user");
 function generateToken(User) {
   const payload = {

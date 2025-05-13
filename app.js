@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const PORT = 4500;
@@ -11,7 +12,7 @@ const profileRoute = require("./routes/yourProfile");
 const Blog = require("./models/blog");
 const UserData = require("./models/user");
 
-HandleMongoDB("mongodb://127.0.0.1:27017/Blogger")
+HandleMongoDB(process.env.MonogURL)
   .then(() => {
     console.log("Connected");
   })
