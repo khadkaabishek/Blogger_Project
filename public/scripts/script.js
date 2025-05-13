@@ -7,14 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const isExpanded =
         dropdownToggle.getAttribute("aria-expanded") === "true";
 
-      // Toggle aria-expanded attribute
       dropdownToggle.setAttribute("aria-expanded", String(!isExpanded));
 
-      // Toggle visibility of dropdown menu
       dropdownMenu.classList.toggle("show");
     });
 
-    // Optional: Close dropdown if clicked outside
     document.addEventListener("click", (event) => {
       if (
         !dropdownToggle.contains(event.target) &&
@@ -23,6 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
         dropdownMenu.classList.remove("show");
         dropdownToggle.setAttribute("aria-expanded", "false");
       }
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuButton = document.querySelector(".hamburger-menu");
+  const navMenu = document.querySelector(".nav-links");
+
+  if (menuButton && navMenu) {
+    menuButton.addEventListener("click", () => {
+      navMenu.classList.toggle("show");
     });
   }
 });

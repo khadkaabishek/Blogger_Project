@@ -26,6 +26,7 @@
   }
   
   .nav-links {
+    
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -114,7 +115,7 @@
     }
   
     .nav-links.show {
-      display: flex;
+      display: block;
     }
   
     .menu-toggle {
