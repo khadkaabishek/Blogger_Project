@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head.ejs') %>
+  <title><%= blog.title %></title>
+  
+  <link rel="stylesheet" href="/css/clickedBlog.css">
+</head>
+<body>
+  <%- include('./partials/nav.ejs') %>
+
+  <main>
+    <article class="blog-container">
+      <img src="<%= blog.coverImageUrl %>" alt="Cover Image" class="blog-image">
+      <header>
+        <h1 class="blog-title"><%= blog.title %></h1>
+        <div class="blog-meta">
+          <img src="<%= user.createdBy.profileImageUrl %>" alt="Author" class="author-img">
+          <span class="author-name"><%= user.createdBy.full_Name %></span>
+          <span>on <%= new Date(blog.createdAt).toUTCString() %></span>
+        </div>
+      </header>
+      <section class="blog-body"><%= blog.body %></section>
+
+      <% if (locals.loggedInUser) { %>
+        <div class="interaction">
+          <form method="POST" action="/blog/<%= blog._id %>/like" style="display: inline;">
+            <button type="submit" class="like-btn">
+              <% if (blog.likes && blog.likes.includes(loggedInUser._id.toString())) { %>
+                ❤️ Liked (<%= blog.likes.length %>)
+              <% } else { %>
+                🤍 Like (<%= blog.likes.length %>)
+              <% } %>
+            </button>
+          </form>
+        </div>
+        <section class="comment-section">
+          <h3>Leave a Comment:</h3>
+          <form class="comment-form" action="/blog/<%= blog._id%>/comment" method="POST">
+            <textarea name="comment" rows="4" placeholder="Write your comment here..." required></textarea>
+            <br>
+            <button type="submit">Submit</button>
+          </form>
+          <% if (locals.comments && comments.length > 0) { %>
+           
+          <% } %>
+        </section>
+      <% } else { %>
+        <hr>
+        <div style="margin-top:1.5rem;">
+          <a class="like-btn" href="/user/signin" style="text-decoration:none;display:inline-block;">Login to interact &amp; comment</a>
+        </div>
+      <% } %>
+      <div class="comments-list">
+        <% comments.forEach(comment => { %>
+          <div class="comment-card">
+            <img src="<%= comment.createdBy.profileImageUrl %>" alt="User" class="comment-avatar">
+            <div class="comment-content">
+              <div class="comment-author"><%= comment.createdBy.full_Name %></div>
+              <div class="comment-date"><%= new Date(comment.createdAt).toUTCString() %></div>
+              <div class="comment-text"><%= comment.comment %></div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </article>
+  </main>
+
+</body>
+<script src = "/scripts/script.js"></script>
+</html>

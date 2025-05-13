@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Read-Blogs</title>
+    <link rel="stylesheet" href="/css/ourblog.css">
+    
+   
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <main>
+        <section class="blog-container">
+            <% blogs.forEach(blog => { %>
+                <article class="blog-card">
+                    <div class="blog-meta">
+                        <img src="<%= blog.createdBy.profileImageUrl %>" alt="Author" class="author-img">
+                        <span class="author-name"><%= blog.createdBy.full_Name %></span>
+                        <span>on <%= new Date(blog.createdAt).toUTCString() %></span>
+                    </div>
+                    <img src="<%= blog.coverImageUrl %>" alt="Cover Image" class="blog-image">
+                    <div class="blog-content">
+                        <h2 class="blog-title"><%= blog.title %></h2>
+                        <div class="blog-body"><%= blog.body %></div>
+                        <a href="/blog/<%= blog._id %>" class="view-btn">View</a>
+                    </div>
+                </article>
+            <% }); %>
+        </section>
+    </main>
+
+</body>
+<script src = "/scripts/script.js"></script>
+</html>
