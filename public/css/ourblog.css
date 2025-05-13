@@ -115,7 +115,7 @@
     }
   
     .nav-links.show {
-      display: block;
+      display: flex;
     }
   
     .menu-toggle {
