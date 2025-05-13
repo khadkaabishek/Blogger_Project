@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = 4500;
+const PORT = process.env.PORT || 4500;
 const path = require("path");
 const userRouter = require("./routes/user");
 const { HandleMongoDB } = require("./connection");
