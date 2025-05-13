@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT ||8080;
+const PORT = process.env.PORT || 8080;
 const path = require("path");
 const userRouter = require("./routes/user");
 const { HandleMongoDB } = require("./connection");
@@ -12,7 +12,11 @@ const profileRoute = require("./routes/yourProfile");
 const Blog = require("./models/blog");
 const UserData = require("./models/user");
 
-HandleMongoDB(process.env.Mongo_URL)
+HandleMongoDB(`${process.env.Mongo_URL}`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000,
+})
   .then(() => {
     console.log("Connected");
   })
