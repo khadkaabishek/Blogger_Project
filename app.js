@@ -12,7 +12,7 @@ const profileRoute = require("./routes/yourProfile");
 const Blog = require("./models/blog");
 const UserData = require("./models/user");
 
-HandleMongoDB(process.env.MonogURL)
+HandleMongoDB(process.env.Mongo_URL)
   .then(() => {
     console.log("Connected");
   })
